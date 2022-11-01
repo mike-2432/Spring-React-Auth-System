@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Roboto:wght@400;700&display=swap');
+
+/*===========
+Variables
+===========*/
+
+
+/*===========
+Global Styles
+===========*/
+
+
+/*===========
+Register
+===========*/
+.form-err-msg {
+  display: none;
+}
+
+input:not(:placeholder-shown):not(:focus):invalid~.form-err-msg {
+  display: block;
+  color: red;
+}
