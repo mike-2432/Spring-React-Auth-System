@@ -1,31 +1,38 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { AppProvider } from './Context'
+import PrivateRoute from './PrivateRoute'
 
 // PAGES //
 import Home from './pages/Home'
 import Login from './pages/Login'
 import Register from './pages/Register'
+import User from './pages/User'
 
 // COMPONENTS //
+import Navbar from './components/Navbar'
+import Sidebar from './components/Sidebar'
 
 
 // RETURN //
 export default function App() {
   return (
     <BrowserRouter>
-      <AppProvider>
-
-        {/* Components */}
-        
+        {/* Components */}   
+        <Navbar />
+        <Sidebar />
 
         {/* Routes */}    
         <Routes>
-          <Route path="/" element={ <Home /> }/>
-          <Route path="/login" element={ <Login /> } />
-          <Route path="/register" element={ <Register /> } />
-        </Routes>
+          {/* Public */}    
+          <Route path="/" element={ <Home/> } />    
+          <Route path="/login" element={ <Login/> } />
+          <Route path="/register" element={ <Register/> } />
+          {/* Private */}
+          <Route element={ <PrivateRoute/> }>
+            <Route path="/user" element={ <User/> }/>
+          </Route>
 
-      </AppProvider>      
+        </Routes>
+      
     </BrowserRouter>
   )
 }

@@ -6,6 +6,7 @@ import com.server.model.NewUserModel;
 public interface UserServiceInterface {
     User registerUser(NewUserModel newUserModel);
     User findUserByEmail(String email);
+    User findUserByName(String username);
     void changePassword(User user, String newPassword);
     boolean doesUsernameExist(String username);
     boolean doesEmailExist(String email);

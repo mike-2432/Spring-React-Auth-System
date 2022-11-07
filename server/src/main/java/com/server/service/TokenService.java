@@ -31,6 +31,7 @@ public class TokenService implements TokenServiceInterface {
         this.jwtEncoder = jwtEncoder;
     }
 
+
     // FUNCTIONS //
     @Override
     public VerificationToken createVerificationToken(User user) {
@@ -88,7 +89,7 @@ public class TokenService implements TokenServiceInterface {
         JwtClaimsSet claims = JwtClaimsSet.builder()
                 .issuer("self")
                 .issuedAt(now)
-                .expiresAt(now.plus(1, ChronoUnit.HOURS))
+                .expiresAt(now.plus(10, ChronoUnit.MINUTES))
                 .subject(authentication.getName())
                 .claim("scope", scope)
                 .build();

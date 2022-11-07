@@ -5,18 +5,35 @@ import com.server.service.UserServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 
 // CONTROLLER //
-// This controller is accessible by logged-in users only //
-@CrossOrigin(origins = "*", maxAge = 3600)
+// This controller is accessible by authorized users only //
+@CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
 @RestController
 @RequestMapping("/user")
 public class UserController {
     @Autowired
     private UserServiceInterface userServiceInterface;
 
+
+    // ENDPOINTS //
+    // ========= //
+
+    // CHECK LOGIN STATUS //
+    @PostMapping("/allowed")
+    public ResponseEntity<String> allowed(Authentication authentication){
+        return new ResponseEntity<>("Success", HttpStatus.OK);
+    }
+
+    // GET USERNAME //
+    @PostMapping("/getUsername")
+    public String getUsername(Authentication authentication) {
+        User user = userServiceInterface.findUserByName(authentication.getName());
+        return user.getUsername();
+    }
 
     // CHANGE PASSWORD //
     @PostMapping("/changePassword")

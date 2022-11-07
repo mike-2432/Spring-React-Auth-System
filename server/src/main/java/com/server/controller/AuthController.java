@@ -17,7 +17,7 @@ import javax.validation.Valid;
 
 // CONTROLLER //
 // This controller is accessible by everyone //
-@CrossOrigin(origins = "*", maxAge = 3600)
+@CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
@@ -67,7 +67,6 @@ public class AuthController {
         return new ResponseEntity<>("Success", HttpStatus.CREATED);
     }
 
-
     // RESEND VERIFICATION TOKEN //
     @GetMapping("/resendVerificationToken")
     public void resendVerificationToken(@RequestParam("email") String emailAddress, HttpServletRequest request) {
@@ -83,7 +82,6 @@ public class AuthController {
         emailServiceInterface.sendEmail(email);
     }
 
-
     // VERIFY REGISTRATION //
     @GetMapping("/confirmRegistration")
     public ResponseEntity<String> registerVerification(@RequestParam("token") String tryToken) {
@@ -96,7 +94,6 @@ public class AuthController {
         }
         return new ResponseEntity<>("Success", HttpStatus.OK);
     }
-
 
     // GET AUTHENTICATION TOKEN //
     @PostMapping("/loginToken")

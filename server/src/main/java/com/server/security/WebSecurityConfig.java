@@ -34,9 +34,9 @@ public class WebSecurityConfig  {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable();
         http.authorizeRequests().antMatchers("/auth/**").permitAll();
-        http.authorizeRequests().antMatchers("/user/**").hasAuthority("USER").anyRequest().authenticated();
-        http.oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt);
-        http.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+        http.authorizeRequests(auth -> auth.anyRequest().authenticated())
+                .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt)
+                .sessionManagement(session->session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
         http.httpBasic(withDefaults());
         return http.build();
     }

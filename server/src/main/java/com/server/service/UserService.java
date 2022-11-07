@@ -49,6 +49,11 @@ public class UserService implements UserServiceInterface, UserDetailsService {
     }
 
     @Override
+    public User findUserByName(String username) {
+        return userRepository.findByUsername(username);
+    }
+
+    @Override
     public void changePassword(User user, String newPassword) {
         user.setPassword(passwordEncoder.encode(newPassword));
         userRepository.save(user);
