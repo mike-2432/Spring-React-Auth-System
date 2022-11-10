@@ -6,9 +6,9 @@ import java.util.Date;
 
 @Data
 @Entity
-@Table(name="verification_token")
-public class VerificationToken {
-    public static final int EXPIRATION_TIME = 15;
+@Table(name = "password_reset_token")
+public class PasswordResetToken {
+    public static final int EXPIRATION_TIME = 60;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,20 +18,18 @@ public class VerificationToken {
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id",
             nullable = false,
-            foreignKey = @ForeignKey(name="VERIFICATION_TOKEN"))
+            foreignKey = @ForeignKey(name="PASSWORD_RESET_TOKEN"))
     public User user;
 
-
     // CONSTRUCTORS //
-    public VerificationToken() {
+    public PasswordResetToken() {
     }
 
-    public VerificationToken(User user, String token) {
+    public PasswordResetToken(User user, String token) {
         this.token = token;
         this.user = user;
         this.expiration = calculateExpirationDate(EXPIRATION_TIME);
     }
-
 
     // FUNCTION //
     private Date calculateExpirationDate(int expirationTime) {

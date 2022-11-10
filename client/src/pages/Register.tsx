@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
+import URL from '../URL';
 
 // REGISTRATION PAGE //
 const Register = () => {
@@ -56,7 +57,7 @@ const Register = () => {
     const handleSubmit = async(e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         try {
-            const response = await fetch("http://localhost:8080/auth/registration", {
+            const response = await fetch(URL+"/api/auth/registration", {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',
@@ -72,14 +73,14 @@ const Register = () => {
                 setAlertMsg([true, "verification mail has been send"])
             }
         } catch(err) {
-            console.error("Something went wrong...");
+            console.error(err);
         }
     }
 
     // RETURN //
     return (
-        <div className="login-page">
-            <div className="login-box">
+        <div className="page-container">
+            <div className="auth-box">
 
                 <h1>Register</h1>
 
@@ -101,8 +102,7 @@ const Register = () => {
                             </div>                        
                         )
                     })}
-
-                    <button className="submit-btn" type="submit">Register</button>
+                    <button className="auth-submit-btn" type="submit">Register</button>
                     {alertMsg && <div className="failed-register-alert">{alertMsg[1]}</div>}
                 </form>   
 

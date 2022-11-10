@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import useLocalStorage from './useLocalStorage';
+import URL from './URL';
 
 // INTERFACES //
 interface ContextProps {
@@ -24,7 +25,7 @@ export function AppProvider({children} : any) {
     useEffect(() => {
         const checkStatus = async() => {
             try {
-                const response = await fetch("http://localhost:8080/user/allowed", {
+                const response = await fetch(URL+"/api/user/allowed", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",

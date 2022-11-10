@@ -1,7 +1,9 @@
 package com.server.controller;
 import com.server.entity.Email;
+import com.server.entity.PasswordResetToken;
 import com.server.entity.User;
 import com.server.entity.VerificationToken;
+import com.server.model.ChangePasswordModel;
 import com.server.model.NewUserModel;
 import com.server.service.EmailServiceInterface;
 import com.server.service.TokenServiceInterface;
@@ -14,12 +16,11 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
-
 // CONTROLLER //
 // This controller is accessible by everyone //
-@CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@RequestMapping("/auth")
+@RequestMapping("/api/auth")
 public class AuthController {
     @Autowired
     private UserServiceInterface userServiceInterface;
@@ -32,9 +33,15 @@ public class AuthController {
         return request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
     }
 
-
     // ENDPOINTS //
     // ========= //
+
+    // GET AUTHENTICATION TOKEN //
+    @PostMapping("/loginToken")
+    public String getLoginToken(Authentication authentication) {
+        String token = tokenServiceInterface.createJwtToken(authentication);
+        return token;
+    }
 
     // REGISTER //
     @PostMapping("/registration")
@@ -62,7 +69,7 @@ public class AuthController {
         String url = applicationUrl(request);
         Email email = new Email(user.getEmail(),
                 "Verification Token",
-                "http://" + url + "/auth/confirmRegistration?token=" + token.getToken());
+                "http://" + url + "/api/auth/confirmRegistration?token=" + token.getToken());
         emailServiceInterface.sendEmail(email);
         return new ResponseEntity<>("Success", HttpStatus.CREATED);
     }
@@ -78,7 +85,7 @@ public class AuthController {
         String url = applicationUrl(request);
         Email email = new Email(emailAddress,
                 "Verification Token",
-                "http://" + url + "/auth/confirmRegistration?token=" + newToken.getToken());
+                "http://" + url + "/api/auth/confirmRegistration?token=" + newToken.getToken());
         emailServiceInterface.sendEmail(email);
     }
 
@@ -92,13 +99,39 @@ public class AuthController {
         if(result == "Expired token") {
             return new ResponseEntity<>("Expired Token", HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity<>("Success", HttpStatus.OK);
+        return new ResponseEntity<>("Your email is verified! You can now log in", HttpStatus.OK);
     }
 
-    // GET AUTHENTICATION TOKEN //
-    @PostMapping("/loginToken")
-    public String getLoginToken(Authentication authentication) {
-        String token = tokenServiceInterface.createJwtToken(authentication);
-        return token;
+    // GET PASSWORD RESET TOKEN //
+    @PostMapping("/getPasswordResetToken")
+    public void getPasswordResetToken(@RequestBody ChangePasswordModel email, HttpServletRequest request) {
+        User user = userServiceInterface.findUserByEmail(email.getEmail());
+        if(user==null) return;
+        PasswordResetToken token = tokenServiceInterface.createResetToken(user);
+
+        String url = applicationUrl(request);
+        Email newEmail = new Email(user.getEmail(),
+                "Reset Token",
+                token.getToken());
+        emailServiceInterface.sendEmail(newEmail);
+    }
+
+    // RESET PASSWORD //
+    @PostMapping("/resetPassword")
+    public ResponseEntity<String> resetPassword(@RequestBody ChangePasswordModel changePasswordModel) {
+        String tryToken = changePasswordModel.getResetToken();
+        String email = changePasswordModel.getEmail();
+        String newPassword = changePasswordModel.getNewPassword();
+        // Check if password is valid
+        if(!userServiceInterface.isPasswordValid(newPassword)) {
+            return new ResponseEntity<>("Password is not valid", HttpStatus.BAD_REQUEST);
+        }
+        // Validate Token
+        String result = tokenServiceInterface.validateResetToken(tryToken, email);
+        if(!result.equals("Success")) return new ResponseEntity<>("Invalid token email combination", HttpStatus.BAD_REQUEST);
+        // Change the password
+        User user = userServiceInterface.findUserByEmail(email);
+        userServiceInterface.changePassword(user, newPassword);
+        return new ResponseEntity<>("Success",HttpStatus.OK);
     }
 }

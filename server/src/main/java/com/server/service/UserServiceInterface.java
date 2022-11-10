@@ -2,7 +2,6 @@ package com.server.service;
 import com.server.entity.User;
 import com.server.model.NewUserModel;
 
-
 public interface UserServiceInterface {
     User registerUser(NewUserModel newUserModel);
     User findUserByEmail(String email);

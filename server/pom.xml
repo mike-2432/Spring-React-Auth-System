@@ -11,7 +11,7 @@
 	<groupId>com.server</groupId>
 	<artifactId>server</artifactId>
 	<version>1</version>
-	<name>server</name>
+	<name>auth_app</name>
 	<description>Login Server</description>
 	<properties>
 		<java.version>19</java.version>

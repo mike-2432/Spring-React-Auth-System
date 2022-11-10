@@ -1,5 +1,5 @@
-import { useGlobalContext } from "../Context"
-import { Link } from 'react-router-dom'
+import { useGlobalContext } from '../Context';
+import { Link } from 'react-router-dom';
 
 // SIDEBAR COMPONENT //
 const Sidebar = () => {
