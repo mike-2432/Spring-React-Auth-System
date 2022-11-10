@@ -17,10 +17,10 @@ Variables
 
   --green: hsl(138, 34%, 53%);
   --green-active: hsl(138, 34%, 45%);
-  --grey: hsl(220, 20%, 55%);
-  --grey-active: hsl(220, 18%, 50%);
+  --grey: hsl(220, 20%, 60%);
+  --grey-active: hsl(220, 18%, 55%);
   --grey-lighter: hsl(220, 10%, 80%);
-  --grey-light: hsl(220, 65%, 96%);
+  --grey-light: hsl(220, 20%, 98%);
   
   --black: hsl(340, 5%, 15%);
   --white: hsl(0, 0%, 100%);
@@ -71,6 +71,7 @@ Navbar
   color: var(--white-dark);
   position: fixed;
   box-shadow: var(--shadow);
+  z-index:1;
 }
 
 .navbar-center {
@@ -220,7 +221,7 @@ Sidebar
 /*===========
 Homepage
 ===========*/
-.homepage {
+.page-container {
   padding-top: var(--nav-height);
 }
 
@@ -245,7 +246,7 @@ Homepage
   width: 100%;
   height: 100%;
   background-color: var(--grey);
-  opacity: 0.28;
+  opacity: 0.2;
   z-index: -2;
   position: absolute;
   left: 0;
@@ -284,10 +285,11 @@ Homepage
   padding: 4rem;
   z-index: -2;
   border: 1px solid var(--white);
+  box-shadow: var(--shadow);
 }
 @media screen and (min-width: 800px) {
   .hero-text-overlay {
-    background-color: var(--grey-active);
+    background-color: var(--green);
     opacity: 0.6;
   }
 }
@@ -311,32 +313,32 @@ Homepage
   margin-bottom: 1.8rem;
 }
 
-.homepage-section-2 {
+.homepage-about {
   height: 40rem;
   background-color: var(--grey-light);
 }
-.homepage-section-2 h1 {
+.homepage-about h1 {
   text-align: center;
   padding-top: 7rem;
 }
-.homepage-section-2-text { 
+.homepage-about-text { 
   padding-top: 1rem;
   width: 90vw;
   max-width: var(--max-width);
   margin: 0 auto; 
 }
-.homepage-section-2-text p {
+.homepage-about-text p {
   padding-top: 1rem;
 }
 
 @media screen and (min-width: 800px) {
-  .homepage-section-2-text {
+  .homepage-about-text {
     padding-top: 2rem;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 2rem;
   }
-  .homepage-section-2-text p {
+  .homepage-about-text p {
     padding-top: 0;
   }
 }
@@ -344,21 +346,48 @@ Homepage
 /*==============
 Profile / account
 ==============*/
-.user-page {
-  padding-top: var(--nav-height);
-  width: 90vw;
-  max-width: var(--max-width);
-  margin: auto;
+.user-page-text-box {
+  width: min(50rem, 92vw);
+  margin: 8rem auto 0 auto;
+  background-color: var(--white);
   text-align: center;
-}
-
-.user-page-text {
-  margin-top: 20rem;
+  padding: 2.5rem 0 3rem 0;
+  border: 1px solid var(--grey-lighter);
+  box-shadow: var(--shadow);
 }
 
 .logout-btn {
+  margin-top: 2rem;
+  width: 20rem;
+  opacity: 0.95;
+  height: 2.5rem;
+  border-radius: 0;
+  background-color: var(--green);
+  border: none;
+  cursor: pointer;
+  font-weight: 700;
+  color: var(--white);
+  transition: var(--transition);
+}
+.logout-btn:hover {
+  background-color: var(--green-active);
+  opacity: 1;
+  transition: var(--transition);
+}
+
+.user-page-change-pass {
+  width: min(50rem, 92vw);
+  margin: 4rem auto 0 auto;
+  text-align: center;
+  padding: 2.2rem;
+  background-color: var(--white);
+    border: 1px solid var(--grey-lighter);
+      box-shadow: var(--shadow);
+}
+
+.change-password-btn {
   margin-top: 1.2rem;
-  margin-bottom: 2.5rem;
+  margin-bottom: 1rem;
   width: 20rem;
   opacity: 0.95;
   height: 2.5rem;
@@ -371,21 +400,39 @@ Profile / account
   transition: var(--transition);
 }
 
-.logout-btn:hover {
+.change-password-btn:hover {
   background-color: var(--green-active);
   opacity: 1;
   transition: var(--transition);
 }
 
+.change-password {
+  margin-top: 1.5rem;
+}
+
+.change-password input {
+  display: flex;
+  margin: auto;
+  padding: 0.6rem;
+  height: 2.5rem;
+  width: 20rem;
+  opacity: 0.8;
+  margin-bottom: 1rem;
+}
+
+.change-password input:focus {
+  opacity: 1;
+}
+
+.change-password-alert {
+  font-weight: 700;
+  color: red;
+}
+
 /*==============
 Login
 ==============*/
-.login-page {
-  padding-top: var(--nav-height);
-  height: 100vh;
-}
-
-.login-box {
+.auth-box {
   margin: 6rem auto 0 auto;
   padding-top: 3rem;
   width: 30rem;
@@ -395,7 +442,7 @@ Login
   text-align: center;
   box-shadow: var(--shadow);
 }
-.login-box h1 {
+.auth-box h1 {
   text-align: center;
   padding-bottom: 2rem;
 }
@@ -417,7 +464,7 @@ Login
   opacity: 1;
 }
 
-.submit-btn {
+.auth-submit-btn {
   margin-top: 1.2rem;
   margin-bottom: 2.5rem;
   width: 20rem;
@@ -431,7 +478,7 @@ Login
   color: var(--white);
   transition: var(--transition);
 }
-.submit-btn:hover {
+.auth-submit-btn:hover {
   background-color: var(--green-active);
   opacity: 1;
   transition: var(--transition);
@@ -486,27 +533,6 @@ Register
   opacity: 1;
 }
 
-.submit-btn {
-  margin-top: 1.2rem;
-  margin-bottom: 2.5rem;
-  width: 20rem;
-  opacity: 0.95;
-  height: 2.5rem;
-  border-radius: 0;
-  background-color: var(--green);
-  border: none;
-  cursor: pointer;
-  font-weight: 700;
-  color: var(--white);
-  transition: var(--transition);
-}
-
-.submit-btn:hover {
-  background-color: var(--green-active);
-  opacity: 1;
-  transition: var(--transition);
-}
-
 .form-err-msg {
   position: absolute;
   margin: auto;
@@ -531,12 +557,40 @@ input:not(:placeholder-shown):not(:focus):invalid~.form-err-msg {
 }
 
 /*===========
+Reset Password
+===========*/
+.reset-submit-btn {
+  margin-bottom: 2.5rem;
+  width: 20rem;
+  opacity: 0.95;
+  height: 2.5rem;
+  border-radius: 0;
+  background-color: var(--green);
+  border: none;
+  cursor: pointer;
+  font-weight: 700;
+  color: var(--white);
+  transition: var(--transition);
+}
+.reset-submit-btn:hover {
+  background-color: var(--green-active);
+  opacity: 1;
+  transition: var(--transition);
+}
+
+.failed-reset-alert {
+  position: absolute;
+  color: red;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  font-weight: 700;
+}
+
+/*===========
 Footer
 ===========*/
 .footer {
   height: 300px;
   background-color: var(--grey-active);
 }
-
-
-
