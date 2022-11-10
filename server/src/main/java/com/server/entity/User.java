@@ -2,7 +2,6 @@ package com.server.entity;
 import lombok.Data;
 import javax.persistence.*;
 
-
 @Data
 @Entity
 @Table(name="user", uniqueConstraints = {

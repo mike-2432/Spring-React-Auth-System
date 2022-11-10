@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-
 @Service
 public class UserService implements UserServiceInterface, UserDetailsService {
     @Autowired
