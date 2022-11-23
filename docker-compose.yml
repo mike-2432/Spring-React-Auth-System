@@ -62,7 +62,7 @@ services:
       - auth-net
 
 # ======================
-# Docker Virtual Network
+# Docker Network
 # ======================
 networks:
   auth-net:
