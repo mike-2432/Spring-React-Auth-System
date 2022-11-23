@@ -9,10 +9,9 @@ spring:
   config:
     import: optional:secrets.yml
   datasource:
-#   url: SECRET
-#   username: SECRET
-#   password: SECRET
-#   driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://database:3306/authdb
+  #   username: SECRET
+  #   password: SECRET
   jpa:
     show-sql: true
     hibernate:
@@ -25,15 +24,12 @@ spring:
     host: smtp.gmail.com
     port: 587
     protocol: smtp
-#   username: SECRET
-#   password: SECRET
+    #   username: SECRET
+    #   password: SECRET
     properties.mail.smtp:
-          starttls.enable: true
-          timeout: 3000
-          connection-timeout: 5000
-          write-timeout: 5000
-          auth: true
-          ssl.trust: smtp.gmail.com
-
-
-
+      starttls.enable: true
+      timeout: 3000
+      connection-timeout: 5000
+      write-timeout: 5000
+      auth: true
+      ssl.trust: smtp.gmail.com
