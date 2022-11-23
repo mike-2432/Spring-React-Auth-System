@@ -1,5 +1,5 @@
-import { Outlet, Navigate} from 'react-router-dom'
-import { useGlobalContext } from './Context'
+import { Outlet, Navigate} from 'react-router-dom';
+import { useGlobalContext } from './Context';
 
 const PrivateRoute = () => {
     const { jwt } = useGlobalContext();
