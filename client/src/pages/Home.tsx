@@ -5,13 +5,12 @@ import { info } from '../data';
 
 // HOME PAGE //
 const Home = () => {
-
     const [scrollA, setScrollA] = useState(0);
     const [scrollB, setScrollB] = useState(0);
     const [scrollC, setScrollC] = useState(0);
+    
     useEffect(() => {
         const handleScroll = () => {            
-            
             setScrollA(window.scrollY/1.5); 
 
             if(window.scrollY<30) setScrollB(0);
@@ -60,8 +59,6 @@ const Home = () => {
                             <div className="homepage-twinblock-inner"><FaLaptopCode/></div>      
                         </div>
                     </div>
-
-
                 </div>
 
                 <div className="homepage-about">
@@ -73,6 +70,7 @@ const Home = () => {
                         })}
                     </div>
                 </div>
+                
             </div>
             <Footer />
         </>
