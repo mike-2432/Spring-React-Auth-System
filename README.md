@@ -1,14 +1,14 @@
 # A Security Project
 
-Please click [HERE](http://18.185.122.61) for a live version of the project. </br>
-Please click [HERE](https://18.185.122.61) for a secure connection (HTTPS). This uses a self-signed certificate, so the site might not be trusted.
+Please click [HERE](http://3.69.49.19) for a live version of the project. </br>
+Please click [HERE](https://3.69.49.19) for a secure connection (HTTPS). This uses a self-signed certificate, so the site might not be trusted.
 
 #### Used Technologies:
 - ReactJS
-- Spring Boot 
-- MySQL 
+- Spring Boot
+- MySQL
 - Docker (Compose)
-- AWS Cloud 
+- AWS Cloud
 - Nginx
 
 #### About

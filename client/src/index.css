@@ -52,6 +52,12 @@ ul {
   list-style-type: none;
 }
 
+canvas {
+  position: absolute;
+  z-index: -1;
+  opacity: 0.06;
+}
+
 a:link,
 a:visited {
   text-decoration: none;
@@ -259,13 +265,15 @@ Homepage main
   align-items: center;
   flex-direction: column;
   text-align: center;
+  padding: 0 1rem;
 }
 .homepage-main-block h1 {
   z-index: 1;
+  font-size: 1.6rem;
 }
 .homepage-main-block p {  
   padding-top: 1rem;
-  font-size: 1.3rem;  
+  font-size: 1.1rem;
   z-index: 1;
 }
 .homepage-main-block-inner {
@@ -327,6 +335,14 @@ Homepage main
     width: 590px;
     max-width: 43.9vw;
     margin-bottom: 0rem;
+  }
+  .homepage-main-block h1 {
+    z-index: 1;
+    font-size: 1.9rem;
+  }
+
+  .homepage-main-block p {
+    font-size: 1.3rem;
   }
 }
 
@@ -469,7 +485,7 @@ Homepage about
 
 @media screen and (min-width: 1040px) {
   .homepage-about-text {
-    padding-bottom: 5rem;
+    padding-bottom: 6rem;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(12, 0.8rem);
     column-gap: 2.5rem;
@@ -495,6 +511,7 @@ Homepage about
 
 @media screen and (min-width: 1250px) {
   .homepage-about-text {
+    padding-bottom: 6.5rem;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(7, 2rem);
     gap: 2.2rem;
@@ -522,7 +539,7 @@ Profile / account
 ==============*/
 .user-page-text-box {
   width: min(50rem, 92vw);
-  margin: 8rem auto 0 auto;
+  margin: 4rem auto 0 auto;
   background-color: var(--white);
   text-align: center;
   padding: 2.5rem 0 3rem 0;
@@ -532,7 +549,8 @@ Profile / account
 
 .logout-btn {
   margin-top: 2rem;
-  width: 20rem;
+  width: 70vw;
+  max-width: 20rem;
   opacity: 0.95;
   height: 2.5rem;
   border-radius: 0;
@@ -555,14 +573,15 @@ Profile / account
   text-align: center;
   padding: 2.2rem;
   background-color: var(--white);
-    border: 1px solid var(--grey-lighter);
-      box-shadow: var(--shadow);
+  border: 1px solid var(--grey-lighter);
+  box-shadow: var(--shadow);
 }
 
 .change-password-btn {
   margin-top: 1.2rem;
   margin-bottom: 1rem;
-  width: 20rem;
+  width: 70vw;
+  max-width: 20rem;
   opacity: 0.95;
   height: 2.5rem;
   border-radius: 0;
@@ -589,7 +608,8 @@ Profile / account
   margin: auto;
   padding: 0.6rem;
   height: 2.5rem;
-  width: 20rem;
+  width: 70vw;
+  max-width: 20rem;
   opacity: 0.8;
   margin-bottom: 1rem;
 }
@@ -607,7 +627,7 @@ Profile / account
 Login
 ==============*/
 .auth-box {
-  margin: 6rem auto 0 auto;
+  margin: 4.5rem auto 0 auto; 
   padding-top: 3rem;
   width: 90vw;
   max-width: 30rem;
@@ -616,6 +636,12 @@ Login
   border: 1px solid var(--grey-lighter);
   text-align: center;
   box-shadow: var(--shadow);
+  z-index: 100;
+}
+@media screen and (min-width: 600px) {
+  .auth-box {
+    margin: 6rem auto 0 auto;
+  }
 }
 .auth-box h1 {
   text-align: center;
@@ -661,14 +687,14 @@ Login
   transition: var(--transition);
 }
 
-.login-page-other {
+.login-page-links {
   font-weight: 700;
   margin-top: 1.3rem;
 }
-.login-page-other p {
+.login-page-links p {
   transition: var(--transition);
 }
-.login-page-other p:hover {
+.login-page-links p:hover {
   transition: var(--transition);
   color: var(--clr-prim-active);
 }
